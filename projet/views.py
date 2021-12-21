@@ -1,4 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template,request
+from flask.wrappers import Request
+from flask_mysqldb import MySQL
+import MySQLdb
 
 app = Flask(__name__)
 
@@ -8,7 +11,9 @@ app.config.from_object('config')
 
 @app.route('/')
 def index():
-        return "Hello world !"
+
+
+    return render_template('index.html')
 
 if __name__ == "__main__":
         app.run()
