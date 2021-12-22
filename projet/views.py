@@ -4,8 +4,11 @@ from projet.color.moment import color_moments
 import os, time, cv2
 from flask import jsonify 
 from projet.color.search import Search
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__,static_url_path='/static/image')
+Bootstrap(app)
 #general parameters
 UPLOAD_FOLDER = '/static/image'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -47,6 +50,7 @@ def test():
 @app.post('/upload')
 def upload():
     #Saving the Uploaded image in the Upload folder
+
     file = request.files['image']
     new_file_name = str(
         str(time.time()) + '.png'
@@ -65,6 +69,16 @@ def upload():
         RESULTS_LIST.append(
             {"image": str(pathImage), "score": str(score)}
         )
+        	# creating a gaborDescripto instance and its kernels
+    output_file = 'index.csv'
+    image = UPLOAD_FOLDER + '/' + new_file_name
+
+	# For the uploaded image ,we will extract and return the Gabor kernels based vector features and also saving it in a csv file
+    features = color_moments(image)
+    feats = [str(f) for f in features]
+    with open(output_file, 'a', encoding="utf8") as f:
+        f.write("%s,%s\n" % (image, ",".join(feats)))
+        f.close()
     #returning the search results
     return jsonify(RESULTS_LIST)
 
