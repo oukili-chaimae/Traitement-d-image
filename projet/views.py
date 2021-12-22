@@ -5,6 +5,7 @@ import os, time, cv2
 from flask import jsonify 
 from projet.color.search import Search
 from flask_bootstrap import Bootstrap
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__,static_url_path='/static/image')
@@ -12,6 +13,7 @@ Bootstrap(app)
 #general parameters
 UPLOAD_FOLDER = '/static/image'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 # Config options - Make sure you created a 'config.py' file.
@@ -52,33 +54,34 @@ def upload():
     #Saving the Uploaded image in the Upload folder
 
     file = request.files['image']
-    new_file_name = str(
-        str(time.time()) + '.png'
-    )
-    file.save(os.path.join(
-            app.config['UPLOAD_FOLDER'],new_file_name
-        ))
-    #Extracting the feature vetor from the uploaded images and adding this vector to our database
-    features = color_moments(str(UPLOAD_FOLDER + '/' + new_file_name))
-    #Comparing and sorting the uploaded image's features with the offline-calulcated images features
+    # new_file_name = str(
+    #     str(time.time()) + '.png'
+    # )
+    filename = secure_filename(file.filename)
+    file.save(os.path.join("static/image/",filename))
+    # #Extracting the feature vetor from the uploaded images and adding this vector to our database
+    features = color_moments(str("./static/image/" + filename))
+   
+ 
+     #Comparing and sorting the uploaded image's features with the offline-calulcated images features
     searcher = Search('./index.csv')
     results = searcher.search(features)
-    # results = searcher.gaborSearch(features)
     RESULTS_LIST = list()
     for (score, pathImage) in results:
         RESULTS_LIST.append(
             {"image": str(pathImage), "score": str(score)}
         )
-        	# creating a gaborDescripto instance and its kernels
+         	# creating a gaborDescripto instance and its kernels
     output_file = 'index.csv'
-    image = UPLOAD_FOLDER + '/' + new_file_name
+    image = "./static/image/" + '/' + filename
 
-	# For the uploaded image ,we will extract and return the Gabor kernels based vector features and also saving it in a csv file
+	# # For the uploaded image ,we will extract and return the Gabor kernels based vector features and also saving it in a csv file
     features = color_moments(image)
-    feats = [str(f) for f in features]
+    print(features)
+    features = [str(f) for f in features]
     with open(output_file, 'a', encoding="utf8") as f:
-        f.write("%s,%s\n" % (image, ",".join(feats)))
-        f.close()
+            f.write("%s,%s\n" % (image, ",".join(features)))
+            f.close()
     #returning the search results
     return jsonify(RESULTS_LIST)
 
