@@ -57,7 +57,7 @@ let update_table = (data) =>
         {
             myTable.row.add(
             [
-                '<img src=' + elem.image + ' alt="" width="300" height="200">',
+                '<img src=' +elem.image +' alt="" width="300" height="200">',
                 elem.score,
             ]
             ).draw();
