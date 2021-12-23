@@ -23,7 +23,7 @@ app.config.from_object('config')
 @app.route('/')
 def index():
 
-    return render_template('index.html')
+    return render_template('home.html')
 #C:/Users/chaimae/Desktop/obj1__0.png
 
 @app.route('/indexColor')
