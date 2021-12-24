@@ -64,7 +64,7 @@ let update_table = (data) =>
             [
                 '<img  src=' +elem.image + ' alt="" width="300" height="200">',
                 elem.score,
-                '<div><form action""><input type ="submit" value="Positive"/></form><button class ="k-state-selected">Nigative</button></div>'
+                '<div><button class ="btn btn-success"><i class="fa fa-check-circle"></i></button><button class ="btn btn-danger"><i class="fa fa-times"></i></button></div>'
             ]
             ).draw();
            // alert(elem.image)
