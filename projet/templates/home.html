@@ -75,9 +75,7 @@
                                     <div class="col">
                                         <input class="form-control form-control-lg" name="myImage" id="img" accept="image/x-png" type="file" required /><br>
                                     <div class="col-auto"><button onclick="upload()" class="btn btn-primary btn-lg" id="submitButton">  Chercher  <i class="fa fa-search"></i></button></div>
-                                </div>
-
-                                
+                                </div>       
                         </div>
                     </div>
                 </div>
@@ -99,6 +97,7 @@
                             <tr>
                                 <th class="border-top-0">Image</th>
                                 <th class="border-top-0">Score</th>
+                                <th class="border-top-0">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -116,23 +115,9 @@
              <i class="fa fa-star"></i><i class="fa fa-star nav-icon"></i><i class="fa fa-star nav-icon"></i>
             <br>
             <div class="container">
-                <p>De nos jours, presque la totalité des images et des vidéos présente dans les différents 
-                    médias sont en couleur, car elles sont plus réalistes et satisfaisantes à l'œil humain. La 
-                    nécessité de produire, de stocker et de transmettre des documents colorés (image ou 
-                    vidéo) a conduit à imaginer des systèmes cohérents pour représenter fidèlement les 
-                    couleurs qui les composent. Ces systèmes sont appelés les espaces de couleurs. Ils sont 
-                    appelés ainsi, car la variation des différentes couleurs peut être représentée dans un 
-                    espace tridimensionnel, où chaque point (dans cet espace) représente une couleur 
-                    différente. Ce nuage de points de couleur différente constitue un espace de couleur. En 
-                    conséquence, l'espace de couleur est une notation par laquelle nous pouvons spécifier 
-                    les couleurs, c'est-à-dire la perception humaine du spectre électromagnétique visible. 
-                    Plusieurs espaces de couleurs ont été employés pour la représentation de couleur basée 
-                    sur les concepts perceptuels. Nous pouvons citer les espaces RGB, CMY, HSV, ClELab, 
-                    etc. Il n'y a aucun accord sur le meilleur espace de couleur. Cependant, ses 
-                    caractéristiques désirables sont la perfection, l'uniformité, la compacité, et il doit être 
-                    orienté utilisateur. La perfection signifie qu 'il doit inclure toutes les couleurs différentes 
-                    perceptibles. L'uniformité signifie que la proximité mesurée parmi les couleurs doit être 
-                    directement rapprochée de la similitude perceptuelle ou psychologique entre ces
+                <p>vous devez rechercher quelque chose que vous avez vu mais que vous ne connaissez pas beaucoup.
+                    Notre application vous permet de telecharger une image à rechercher au lieu de saisir le text
+   
 
                 </p>
 
@@ -179,5 +164,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="{{ url_for('static',filename='js/axios.js') }}" ></script>
+
+
     </body>
 </html>

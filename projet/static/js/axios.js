@@ -3,12 +3,14 @@ let upload = () =>
 
     let timerInterval
     Swal.fire({
-      title: 'Please Wait !',
+      title: 'Traitement en cours...!',
       html: '',
       timer: 2600,
+      showCloseButton: true,
       timerProgressBar: true,
       didOpen: () => {
-        Swal.showLoading()
+       
+        
         const b = Swal.getHtmlContainer().querySelector('b')
         timerInterval = setInterval(() => {
           b.textContent = Swal.getTimerLeft()
@@ -23,14 +25,17 @@ let upload = () =>
         console.log('I was closed by the timer')
       }
     })
-
-
     let formData = new FormData();
     let img = document.getElementById('img').files[0]
 
     if(img == null)
     {
-        alert('image value is NULL')
+      Swal.fire({
+        timer: 2600,
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Veuillez choisir une image',
+        showCloseButton: true,})
         return -1
     }
 
@@ -57,10 +62,18 @@ let update_table = (data) =>
         {
             myTable.row.add(
             [
-                '<img src=' +elem.image + ' alt="" width="300" height="200">',
+                '<img  src=' +elem.image + ' alt="" width="300" height="200">',
                 elem.score,
+                '<div><form action""><input type ="submit" value="Positive"/></form><button class ="k-state-selected">Nigative</button></div>'
             ]
             ).draw();
+           // alert(elem.image)
+
+            $('.k-state-selected').on("click", function(){
+               var p=elem.image;
+               p.save(os.path.join('static/new'))
+             alert(elem.image);
+             });
         }
     )
 }

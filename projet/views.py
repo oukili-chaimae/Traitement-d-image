@@ -54,15 +54,12 @@ def upload():
     #Saving the Uploaded image in the Upload folder
 
     file = request.files['image']
-    # new_file_name = str(
-    #     str(time.time()) + '.png'
-    # )
+
     filename = secure_filename(file.filename)
     file.save(os.path.join("static/image/",filename))
     # #Extracting the feature vetor from the uploaded images and adding this vector to our database
     features = color_moments(str("./static/image/" + filename))
-   
- 
+
      #Comparing and sorting the uploaded image's features with the offline-calulcated images features
     searcher = Search('./index.csv')
     results = searcher.search(features)
@@ -71,11 +68,11 @@ def upload():
         RESULTS_LIST.append(
             {"image": str(pathImage), "score": str(score)}
         )
-         	# creating a gaborDescripto instance and its kernels
+         
     output_file = 'index.csv'
     image = "./static/image/" + '/' + filename
 
-	# # For the uploaded image ,we will extract and return the Gabor kernels based vector features and also saving it in a csv file
+	# # For the uploaded image ,we will extract and return the color moments features and also saving it in a csv file
     features = color_moments(image)
     print(features)
     features = [str(f) for f in features]
@@ -84,6 +81,17 @@ def upload():
             f.close()
     #returning the search results
     return jsonify(RESULTS_LIST)
+
+# @app.route('/positive', methods=['POST','GET'])
+# def positive():
+    
+#     file = request.files['image']
+
+#     filename = secure_filename(file.filename)
+#     file.save(os.path.join("static/new/",filename))
+#     return "Done !!"
+
+
 
 if __name__ == "__main__":
         app.run()
