@@ -5,7 +5,6 @@ from flask import Flask, app
 
 
 # Compute low order moments(1,2,3)
-
 def color_moments(file1):
         img = cv2.imread(file1)
         if img is None:
@@ -35,8 +34,8 @@ def color_moments(file1):
         s_thirdMoment = s_skewness**(1./3)
         v_thirdMoment = v_skewness**(1./3)
         color_feature.extend([h_thirdMoment, s_thirdMoment, v_thirdMoment])
-
         return color_feature
+        
 if __name__ == "__main__":
     output_file = 'index.csv'
     c=1

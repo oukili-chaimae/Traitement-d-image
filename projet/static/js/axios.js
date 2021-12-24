@@ -1,6 +1,5 @@
 let upload = () =>
 {
-
     let timerInterval
     Swal.fire({
       title: 'Traitement en cours...!',
@@ -8,9 +7,7 @@ let upload = () =>
       timer: 2600,
       showCloseButton: true,
       timerProgressBar: true,
-      didOpen: () => {
-       
-        
+      didOpen: () => { 
         const b = Swal.getHtmlContainer().querySelector('b')
         timerInterval = setInterval(() => {
           b.textContent = Swal.getTimerLeft()
@@ -51,7 +48,6 @@ let upload = () =>
     });
 }
 
-
 let update_table = (data) =>
 {
     console.log("data" ,data)
@@ -64,18 +60,29 @@ let update_table = (data) =>
             [
                 '<img  src=' +elem.image + ' alt="" width="300" height="200">',
                 elem.score,
-                '<div><button class ="btn btn-success"><i class="fa fa-check-circle"></i></button><button class ="btn btn-danger"><i class="fa fa-times"></i></button></div>'
+               // '<div><button class ="btn btn-success" onclick="positive()"  ><i class="fa fa-check-circle"></i></button><button class ="btn btn-danger"><i class="fa fa-times"></i></button></div>'
             ]
             ).draw();
            // alert(elem.image)
-
-            $('.k-state-selected').on("click", function(){
-               var p=elem.image;
-               
-             alert(p);
-             });
+          //  $('.btn-success').on("click", function(){
+          //   let formData = new FormData();
+          //   let img = document.getElementById('img').files[0]
+          //   var p=elem.image;
+           
+          //   formData.append("image", img);
+          //   axios.post('upload', formData, {
+          //       headers: {
+          //         'Content-Type': 'multipart/form-data'
+          //   }
+           
+            
+            
+         // alert(p);
+             // })
         }
-    )
+  )
 }
+
+
 
 
