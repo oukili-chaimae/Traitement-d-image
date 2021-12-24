@@ -61,7 +61,7 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead" id="accueil" style = "background-image: url('assets/img/bg-masthead.jpg') no-repeat center center">
+        <header class="masthead" id="accueil">
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
@@ -69,11 +69,9 @@
                             <!-- Page heading-->
                             <h1 class="mb-5">Bienvenue !!</h1>
                             <p> Choisir votre image ci-dessus et commencer votre recherche</p>
-           
-                           
                                 <div class="row inputoutput" >
                                     <div class="col ">
-                                        <img id="imageSrc" style="width:200px; height:200px"/>
+                                        <img id="imageSrc" style="width:150px; height:150px"/>
                                         <input class="form-control form-control-lg" name="myImage" id="img" accept="image/x-png" type="file" required /><br>
                                     <div class="col-auto"><button onclick="upload()" class="btn btn-primary btn-lg" id="submitButton">  Chercher  <i class="fa fa-search"></i></button></div>
                                 </div>       
@@ -111,16 +109,21 @@
 
 
         <!-- About section-->
-        <section class="testimonials text-center bg-light" id="about">
+        <section class="testimonials col-md-12 text-center bg-light" id="about">
              <h2> Apropos de nous</h2>
              <i class="fa fa-star"></i><i class="fa fa-star nav-icon"></i><i class="fa fa-star nav-icon"></i>
-            <br>
+        </br>
             <div class="container">
-                <p>vous devez rechercher quelque chose que vous avez vu mais que vous ne connaissez pas beaucoup.
-                    Notre application vous permet de telecharger une image à rechercher au lieu de saisir le text
-   
-
+                <div class="row" style="margin-left:300px">
+                    <div class="col-md-8">
+                <p> <span>Vous devez rechercher quelque chose que vous avez vu mais que vous ne connaissez pas beaucoup.</br>
+                    Notre application vous permet de télécharger une image à rechercher au lieu de saisir le text,
+                    ainsi elle vous donne une meilleure resultat qui se baser sur l'extraction 
+                    des caractéristiques des moments du couleur.</span>
                 </p>
+            </div>
+            </div>
+
 
             </div>
         </section>
@@ -137,11 +140,9 @@
                             <li><a  href="#resultat"><i class="fa fa-table"></i> Resultat</a></li>
                             <li><a  href="#about"> <i class="fa fa-buysellads"></i> propos</a></li>
                         </ul>
-
                     </div>
-
                 </div>
-                    <span style="color:black;font-style: oblique;font-family:cursive">MST-SIM&copy; 2021-2022 . All Rights Reserved.</span>
+                   <div class="text-center"> <span style="color:black;font-style: oblique;font-family:cursive">MST-SIM&copy; 2021-2022 . All Rights Reserved.</span></div>
                 </div>
             </div>
         </footer>
