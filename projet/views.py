@@ -11,28 +11,26 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__,static_url_path='/static/image')
 Bootstrap(app)
 #general parameters
-UPLOAD_FOLDER = '/static/image'
+UPLOAD_FOLDER = '/static/image'#chemin pour enregistrer les images
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 # Config options - Make sure you created a 'config.py' file.
 app.config.from_object('config')
-# To get one variable, tape app.config['MY_VARIABLE']
 
+#page d'accueil
 @app.route('/')
 def index():
 
     return render_template('home.html')
-#C:/Users/chaimae/Desktop/obj1__0.png
 
+#Eextraction des carateristique des images et les stocker dans le fichier index.csv
 @app.route('/indexColor')
 def test():
     output_file = 'index.csv'
     c=1
     all_files = os.listdir('static/image/')
-    
-	#For each image in the database we will extract the Gabor kernels based vector features and saving it in a csv file
+	#Pour chaque image extraire leur caracteristique concernant les 3 moments de couleur et les stocker dans le csv
     for imagePath in all_files:
         imageId = imagePath[imagePath.rfind("/")+1:]
         image = "./static/image/"+imagePath
@@ -52,38 +50,31 @@ def test():
 @app.post('/upload')
 def upload():
     #Saving the Uploaded image in the Upload folder
-
     file = request.files['image']
-
     filename = secure_filename(file.filename)
     file.save(os.path.join("static/image/",filename))
-    # #Extracting the feature vetor from the uploaded images and adding this vector to our database
+    # Exctration du caracteristique du nouvelle image et les ajouter a notre base de donnees
     features = color_moments(str("./static/image/" + filename))
-
-     #Comparing and sorting the uploaded image's features with the offline-calulcated images features
+     #Comparer et trier les fonctionnalités de l'image téléchargée avec les fonctionnalités des images calculées hors ligne
     searcher = Search('./index.csv')
     results = searcher.search(features)
     RESULTS_LIST = list()
     for (score, pathImage) in results:
         RESULTS_LIST.append(
             {"image": str(pathImage), "score": str(score)}
-        )
-         
+        )    
     output_file = 'index.csv'
     image = "./static/image/" + '/' + filename
-
-	# # For the uploaded image ,we will extract and return the color moments features and also saving it in a csv file
+	#Pour l'image téléchargée, nous extrairons et renverrons les fonctionnalités des moments de couleur
+    #et l'enregistrerons également dans un fichier csv
     features = color_moments(image)
     print(features)
     features = [str(f) for f in features]
     with open(output_file, 'a', encoding="utf8") as f:
             f.write("%s,%s\n" % (image, ",".join(features)))
             f.close()
-    #returning the search results
+    #afficher les resultats
     return jsonify(RESULTS_LIST)
-
- 
-
 
 
 if __name__ == "__main__":
