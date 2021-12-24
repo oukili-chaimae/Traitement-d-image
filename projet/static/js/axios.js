@@ -71,10 +71,11 @@ let update_table = (data) =>
 
             $('.k-state-selected').on("click", function(){
                var p=elem.image;
-               p.save(os.path.join('static/new'))
-             alert(elem.image);
+               
+             alert(p);
              });
         }
     )
 }
+
 

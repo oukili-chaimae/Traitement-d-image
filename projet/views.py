@@ -82,14 +82,7 @@ def upload():
     #returning the search results
     return jsonify(RESULTS_LIST)
 
-# @app.route('/positive', methods=['POST','GET'])
-# def positive():
-    
-#     file = request.files['image']
 
-#     filename = secure_filename(file.filename)
-#     file.save(os.path.join("static/new/",filename))
-#     return "Done !!"
 
 
 
