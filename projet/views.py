@@ -76,14 +76,7 @@ def upload():
     #afficher les resultats
     return jsonify(RESULTS_LIST)
 
-@app.route('/positive', methods=['POST'])
-def positive():
- print("Got request in static files")
- print(request.files)
- f = request.files['static/new']
- f.save(f.filename)
- resp = {"success": True, "response": "file saved!"}
- return jsonify(resp), 200
+
 
 
 if __name__ == "__main__":
